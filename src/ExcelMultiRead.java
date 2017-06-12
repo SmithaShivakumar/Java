@@ -40,19 +40,14 @@ public class ExcelMultiRead {
 		InputStream inp = null;
 		byte[] buffer = new byte[1024];
 		try {
-			// print("inputFile.getName()" + inputFile.getName(), debugOn);
 			inp = new FileInputStream(inputFile);
-			// print("file read");
 			Workbook wb = WorkbookFactory.create(inp);
 			String filename = getFileName(inputFile);
-			// print("targetDir=" + targetDir, debugOn);
-			// print("<wb.getNumberOfSheets()=" + wb.getNumberOfSheets(),
-			// debugOn);
+
 			FileOutputStream zipOut = new FileOutputStream(zipDir + "\\" + filename + ".zip");
 			System.out.println("zipOut==" + zipOut);
 			ZipOutputStream zos = new ZipOutputStream(zipOut);
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-				// print(wb.getSheetAt(i).getSheetName(), debugOn);
 				File fout = new File(targetDir + "\\" + filename + "_" + wb.getSheetAt(i).getSheetName() + ".csv");
 				System.out.println("fout=" + fout.getName());
 				FileOutputStream fos = new FileOutputStream(fout);
@@ -76,7 +71,6 @@ public class ExcelMultiRead {
 
 			}
 			zos.close();
-			// print("file closed");
 		} catch (InvalidFormatException ex) {
 			Logger.getLogger(ExcelMultiRead.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (FileNotFoundException ex) {
