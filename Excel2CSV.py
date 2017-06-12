@@ -16,5 +16,5 @@ def csv_from_excel(excel_file):
             wr.writerow(x for x in worksheet.row_values(rownum))#list(x.encode('utf-8') if type(x) == type(u'') else x for x in worksheet.row_values(rownum)))
         your_csv_file.close()
 
-#if __name__ == "__main__":
-# csv_from_excel('C:/Users/Tenzan/Documents/Smitha/straddle_test/ForRepo/Smitha/Data_Universe.xlsx')
+if __name__ == "__main__":
+  csv_from_excel('C:/Users/smitha/Downloads/PJM_V4.xlsx')
