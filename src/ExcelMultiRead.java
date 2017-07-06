@@ -44,29 +44,20 @@ public class ExcelMultiRead {
 		InputStream inp = null;
 		byte[] buffer = new byte[1024];
 		try {
-			// print("inputFile.getName()" + inputFile.getName(), debugOn);
 			inp = new FileInputStream(inputFile);
-			// print("file read");
 			Workbook wb = WorkbookFactory.create(inp);
 			String filename = getFileName(inputFile);
-			// print("targetDir=" + targetDir, debugOn);
-			// print("<wb.getNumberOfSheets()=" + wb.getNumberOfSheets(),
-			// debugOn);
+
 			FileOutputStream zipOut = new FileOutputStream(zipDir + File.separatorChar + filename + ".zip");
-			//System.out.println("zipOut==" + zipOut);
+
 			ZipOutputStream zos = new ZipOutputStream(zipOut);
 			String CSV_FILE = wb.getSheetAt(7).getSheetName();
 			System.out.println(CSV_FILE) ;
-			//for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-			// print(wb.getSheetAt(i).getSheetName(), debugOn);
-			//File fout = new File(targetDir + "\\" + filename + "_" + wb.getSheetAt(i).getSheetName() + ".csv");
 			File fout = new File(targetDir + File.separatorChar + "Zones.csv");
 
-			//System.out.println("fout=" + fout.getName());
 			FileOutputStream fos = new FileOutputStream(fout);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 
-			//echoAsCSV(wb.getSheetAt(i), osw);
 			echoAsCSV(wb.getSheetAt(7), osw);
 
 			osw.close();
@@ -82,11 +73,9 @@ public class ExcelMultiRead {
 			in.close();
 			zos.closeEntry();
 
-			// remember close it
 
-			//}
 			zos.close();
-			// print("file closed");
+
 		} catch (InvalidFormatException ex) {
 			Logger.getLogger(ExcelMultiRead.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (FileNotFoundException ex) {
@@ -104,11 +93,11 @@ public class ExcelMultiRead {
 	}
 
 	public static void echoAsCSV(Sheet sheet, OutputStreamWriter osw) throws IOException {
-		//System.out.println("sheet.getSheetName()" + sheet.getSheetName());
+
 		Row row = null;
 		String header = "ZoneID, Description, Reserve(%load)";
 		osw.write(header + "\n");
-		//System.out.println("sheet.getLastRowNum()=" + sheet.getLastRowNum());
+
 		for (int rowIndex = 1	; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
 			row = sheet.getRow(rowIndex);
 
